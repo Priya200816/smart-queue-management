@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- 🌟 NAVBAR -->
+<div class="navbar">
+    <div class="logo">💚 SmartQueue</div>
+    <div class="nav-right">
+        <span>👤 {{ name }}</span>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<!-- 🌈 MAIN DASHBOARD -->
+<div class="dashboard">
+
+    <!-- 🎉 WELCOME -->
+    <div class="welcome">
+        <h2>Welcome, {{ name }} 👋</h2>
+        <p>Track your queue in real-time</p>
+    </div>
+
+    <!-- 🎫 ACTION CARD -->
+    <div class="action-card">
+        <h3>Join Queue</h3>
+        <p>Get your token and skip waiting line</p>
+
+        <form method="POST">
+            {% if token == 0 %}
+                <button name="action" value="get">🎫 Get Token</button>
+            {% else %}
+                <button disabled class="disabled">✔ Token Taken</button>
+            {% endif %}
+        </form>
+
+        {% if token != 0 %}
+        <form method="POST">
+            <button name="action" value="cancel" class="cancel">
+                ❌ Cancel Token
+            </button>
+        </form>
+
+        <p class="success">🎉 You are in the queue!</p>
+        {% endif %}
+    </div>
+
+    <!-- 📊 STATS -->
+    <div class="stats">
+
+        <div class="box blue">
+            <h4>Your Token</h4>
+            <p>{{ token if token!=0 else "--" }}</p>
+        </div>
+
+        <div class="box green">
+            <h4>Now Serving</h4>
+            <p>{{ current }}</p>
+        </div>
+
+        <div class="box orange">
+            <h4>People Ahead</h4>
+            <p>{{ people }}</p>
+        </div>
+
+        <div class="box purple">
+            <h4>Wait Time</h4>
+            <p>{{ wait }} min</p>
+        </div>
+
+    </div>
+
+    <!-- 🔔 STATUS -->
+    <div class="status">
+        <h3>{{ status }}</h3>
+    </div>
+
+</div>
+
+</body>
+</html>
