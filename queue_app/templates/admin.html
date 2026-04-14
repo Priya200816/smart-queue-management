@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="hero-card">
+
+    <h2>🏥 Admin Dashboard</h2>
+
+    <p>🔢 Now Serving: {{ current }}</p>
+    <p>👥 Total Users in Queue: {{ total }}</p>
+
+    <form method="POST">
+        <button>➕ Next Token</button>
+    </form>
+
+    <br>
+    <a href="/">Logout</a>
+
+</div>
+
+</body>
+</html>
